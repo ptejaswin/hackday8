@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -66,6 +68,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Button fab = (Button) findViewById(R.id.upload);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "User:priyamtejaswin - Success! Discount added to wallet", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
     }
 
@@ -75,8 +85,6 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra("prices", compPrices);
         startActivity(intent);
     }
-
-
 
 
 
@@ -156,9 +164,12 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < items.size(); i++){
                                 scanResults.setText( scanResults.getText() + "\n" +
                                         items.get(i) + "\t\t\t" + prices.get(i) + "\n");
-                                        compItems = compItems + "," + items.get(i);
-                                        compPrices = compPrices + "," + prices.get(i);
+                                        compItems =  items.get(i)+ "," + compItems;
+                                        compPrices = prices.get(i)+","+compPrices ;
                             }
+
+                            compItems = compItems.substring(0, compItems.length() - 1);
+                            compPrices = compPrices.substring(0, compPrices.length() - 1);
 
 //                        scanResults.setText(scanResults.getText() + "Blocks: " + "\n");
 //                        scanResults.setText(scanResults.getText() + blocks + "\n");

@@ -8,6 +8,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
+
 public class CompareActivity extends AppCompatActivity {
 
     private TextView compareRes;
@@ -22,13 +27,23 @@ public class CompareActivity extends AppCompatActivity {
         String[] items = getIntent().getStringExtra("items").split(",");
         String[] prices = getIntent().getStringExtra("prices").split(",");
 
+        List<String> discountedPrices = Arrays.asList(prices.clone());
+
+        discountedPrices.set(items.length-1, "Flipkart Prices!");
+        float discount = 5;
+        Random generator = new Random();
+        for (int i = 0; i < items.length-1; i++){
+            discount = generator.nextFloat()*10;
+            discountedPrices.set(i,Float.toString(Float.valueOf(prices[i]) - discount));
+        }
+
         compareRes = (TextView) findViewById(R.id.compareText);
 
         compareRes.setText("Items and comparison:\n\n");
 
-        for (int i = 0; i < items.length; i++){
+        for (int i = items.length-1; i >=0; i--){
             compareRes.setText( compareRes.getText() + "\n" +
-                    items[i] + "\t\t\t" + prices[i] + "\n");
+                    items[i] + "\t\t\t" + prices[i] + "\t\t\t" + discountedPrices.get(i) + "\n");
         }
 
 
@@ -36,7 +51,7 @@ public class CompareActivity extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "User:priyamtejaswin-Items Added to Cart", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
         });

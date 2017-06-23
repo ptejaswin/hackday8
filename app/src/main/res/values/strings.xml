@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">fkg_v1</string>
+    <string name="title_activity_compare">CompareActivity</string>
+    <string name="large_text">
+        "Flipkart Grocery App.\n\n"
+
+        "Compare prices of items\n\n"
+
+
+    </string>
+    <string name="action_settings">Settings</string>
 </resources>

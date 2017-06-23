@@ -38,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
     private static final int PHOTO_REQUEST = 10;
     private TextView scanResults;
     private ImageView imageView;
+    private String compItems= "";
+    private String compPrices= "";
     private Uri imageUri;
     private TextRecognizer detector;
     private static final int REQUEST_WRITE_PERMISSION = 20;
@@ -69,8 +71,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void compareActivity(View view){
         Intent intent = new Intent (this, CompareActivity.class);
-        intent.putExtra("items", "item1,item2");
-        intent.putExtra("prices", "p1,p2");
+        intent.putExtra("items", compItems);
+        intent.putExtra("prices", compPrices);
         startActivity(intent);
     }
 
@@ -154,6 +156,8 @@ public class MainActivity extends AppCompatActivity {
                             for (int i = 0; i < items.size(); i++){
                                 scanResults.setText( scanResults.getText() + "\n" +
                                         items.get(i) + "\t\t\t" + prices.get(i) + "\n");
+                                        compItems = compItems + "," + items.get(i);
+                                        compPrices = compPrices + "," + prices.get(i);
                             }
 
 //                        scanResults.setText(scanResults.getText() + "Blocks: " + "\n");

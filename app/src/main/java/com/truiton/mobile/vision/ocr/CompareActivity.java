@@ -24,10 +24,12 @@ public class CompareActivity extends AppCompatActivity {
 
         compareRes = (TextView) findViewById(R.id.compareText);
 
+        compareRes.setText("Items and comparison:\n\n");
 
-        compareRes.setText("Paste items and comparison here");
-
-        compareRes.setText(compareRes.getText()+"\n\nhnnjnj");
+        for (int i = 0; i < items.length; i++){
+            compareRes.setText( compareRes.getText() + "\n" +
+                    items[i] + "\t\t\t" + prices[i] + "\n");
+        }
 
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

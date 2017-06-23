@@ -20,6 +20,7 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"/>
 
+
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
@@ -32,6 +33,26 @@
         tools:layout_constraintLeft_creator="1"
         tools:layout_constraintRight_creator="1"
         />
+
+
+    <Button
+        android:id="@+id/compareButton"
+        android:text="Compare Receipt"
+        android:textSize="10dp"
+        android:layout_height="50dp"
+        android:layout_width="80dp"
+        android:layout_marginTop="50dp"
+        android:onClick="compareActivity" />
+
+    <!--<Button-->
+        <!--android:text="Compare Receipt"-->
+        <!--android:textSize="10dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_width="80dp"-->
+        <!--android:layout_marginTop="100dp"-->
+        <!--android:onClick="compareActivity" />-->
+
+
 
     <TextView
         android:id="@+id/textView"

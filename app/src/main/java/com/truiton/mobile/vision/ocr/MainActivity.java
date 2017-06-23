@@ -20,6 +20,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.*;
 
 import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.text.Text;
@@ -49,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Button button = (Button) findViewById(R.id.button);
         scanResults = (TextView) findViewById(R.id.results);
+
         if (savedInstanceState != null) {
             imageUri = Uri.parse(savedInstanceState.getString(SAVED_INSTANCE_URI));
             scanResults.setText(savedInstanceState.getString(SAVED_INSTANCE_RESULT));
@@ -61,7 +63,20 @@ public class MainActivity extends AppCompatActivity {
                         String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_WRITE_PERMISSION);
             }
         });
+
+
     }
+
+    public void compareActivity(View view){
+        Intent intent = new Intent (this, CompareActivity.class);
+        intent.putExtra("items", "item1,item2");
+        intent.putExtra("prices", "p1,p2");
+        startActivity(intent);
+    }
+
+
+
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

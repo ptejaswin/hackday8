@@ -28,6 +28,9 @@ import com.google.android.gms.vision.text.TextRecognizer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private static final String LOG_TAG = "Text API";
@@ -109,15 +112,46 @@ public class MainActivity extends AppCompatActivity {
                     if (textBlocks.size() == 0) {
                         scanResults.setText("Scan Failed: Found nothing to scan");
                     } else {
+                        List<String> wordList = new ArrayList<String>(Arrays.asList(words.split(",")));
+                        List<String> parsedList = wordList.subList(0, ((ArrayList) wordList).size()-1);
+
+
+                        if(!wordList.get(0).equals("ITEM")){
+                            scanResults.setText("\n\nScan failed. Please try again.");
+                        }
+                        else if(parsedList.size()%2!=0){
+                            scanResults.setText("\n\nScan failed. Please try again.");
+                        }
+
+                        else {
+                            List<String> items = new ArrayList<String>();
+                            List<String> prices = new ArrayList<String>();
+
+                            for (int i = 0; i < parsedList.size()/2; i++) {
+                                    items.add(parsedList.get(i));
+                            }
+                            for (int i=parsedList.size()/2; i<parsedList.size(); i++){
+                                prices.add(parsedList.get(i));
+                            }
+
+                            scanResults.setText("");
+
+                            for (int i = 0; i < items.size(); i++){
+                                scanResults.setText( scanResults.getText() + "\n" +
+                                        items.get(i) + "\t\t\t" + prices.get(i) + "\n");
+                            }
+
 //                        scanResults.setText(scanResults.getText() + "Blocks: " + "\n");
 //                        scanResults.setText(scanResults.getText() + blocks + "\n");
 //                        scanResults.setText(scanResults.getText() + "---------" + "\n");
 //                        scanResults.setText(scanResults.getText() + "Lines: " + "\n");
 //                        scanResults.setText(scanResults.getText() + lines + "\n");
 //                        scanResults.setText(scanResults.getText() + "---------" + "\n");
-                        scanResults.setText("\nWords: " + "\n");
-                        scanResults.setText(scanResults.getText() + words + "\n");
-                        scanResults.setText(scanResults.getText() + "---------" + "\n");
+
+//                            scanResults.setText("\nWords: " + "\n");
+//                            scanResults.setText(scanResults.getText() + words + "\n");
+//                            scanResults.setText(scanResults.getText() + "---------" + "\n");
+                        }
                     }
                 } else {
                     scanResults.setText("Could not set up the detector!");
